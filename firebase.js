@@ -15,16 +15,23 @@ if(!firebase.apps.length){
   firebase.initializeApp(firebaseConfig);   // Initialize Firebase
 }
 
-export function writeUserData(location) {
+export function currentWriteUserData(driverID, location) {
   const db = firebase.database().ref('Drivers')
-  db.child("1234567789").child("StartingPosition").set({
-    "ABC": "Testing Pos"
-  })
-  db.child("1234567789").child("Current").set({
+  db.child(driverID).child("CurrentPosition").set({
     location
-  });
-  db.child("1234567789").child("FinalPosition").set({
-    "XYZ": "Testing Pos"
   })
 }
 
+export function startWriteUserData(driverID, location) {
+  const db = firebase.database().ref('Drivers')
+  db.child(driverID).child("StartingPosition").set({
+    location
+  })
+}
+
+export function finalWriteUserData(driverID, location) {
+  const db = firebase.database().ref('Drivers')
+  db.child(driverID).child("FinalPosition").set({
+    location
+  })
+}

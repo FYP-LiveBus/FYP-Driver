@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react'
 import { SafeAreaView } from 'react-navigation'
-import { Text, StyleSheet } from 'react-native'
-import Map from '../components/Map'
 import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
