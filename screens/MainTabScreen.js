@@ -35,7 +35,7 @@ const MainTabScreen = () => (
         name="Explore"
         component={ExploreScreen}
         options={{
-          tabBarLabel: 'Explore',
+          tabBarLabel: 'Map',
           tabBarColor: '#694fad',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-aperture" color={color} size={26} />
