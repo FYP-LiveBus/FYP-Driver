@@ -1,32 +1,24 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 
-const DetailsScreen = ({navigation}) => {
-    return (
-      <View style={styles.container}>
-        <Text style={{marginBottom: 15}}>Notifications Screen</Text>
-         <Button
-            title="Back to Home"
-            onPress={() => navigation.navigate("Home")}
-        />
-       {/* <Button
-            title="Go to home"
-            onPress={() => navigation.navigate("Home")}
-        />
-        <Button
-            title="Go back"
-            onPress={() => navigation.goBack()}
-        /> */}
-      </View>
-    );
+const DetailsScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={{ marginBottom: 15 }}>Notifications Screen</Text>
+      <Button
+        title="Back to Home"
+        onPress={() => navigation.navigate("Home")}
+      />
+    </View>
+  );
 };
 
 export default DetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

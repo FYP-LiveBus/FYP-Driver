@@ -20,11 +20,14 @@ import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import { set } from "react-native-reanimated";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
 
   const [routeDetails, setRouteDetails] = React.useState({});
+
+  const [busDetails, setBusDetails] = React.useState({});
 
   const theme = useTheme();
 
@@ -40,14 +43,24 @@ const HomeScreen = ({ navigation }) => {
             `https://livebusapi.herokuapp.com/api/admin/routes/${user1.username}`
           )
           .then((response) => {
-            setRouteDetails(response.data);
+            let r = response.data;
+            axios
+              .get(
+                `https://livebusapi.herokuapp.com/api/admin/buses/getByNo/${r.busNo}`
+              )
+              .then((resp) => {
+                let b = resp.data;
+                setBusDetails(b);
+                setRouteDetails(response.data);
+              })
+              .catch((e) => alert("Bo bus is assigned to this route"));
           })
           .catch((err) => alert("No route is assigned you"));
         setUser(user1);
       } catch (e) {
         console.log(e);
       }
-    }, 2000);
+    }, 1000);
   }, []);
 
   // Push Notification
@@ -159,7 +172,11 @@ const HomeScreen = ({ navigation }) => {
           {
             text: "Yes",
             onPress: () =>
-              navigation.navigate("Explore", { user, routeDetails }),
+              navigation.navigate("Explore", {
+                user,
+                routeDetails,
+                busDetails,
+              }),
           },
         ],
         { cancelable: false }

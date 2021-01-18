@@ -18,7 +18,6 @@ import { useTheme } from "react-native-paper";
 
 import { AuthContext } from "../components/context";
 
-// import Users from '../model/users';
 import axios from "axios";
 
 const SignInScreen = ({ navigation }) => {
@@ -91,10 +90,6 @@ const SignInScreen = ({ navigation }) => {
   };
 
   const loginHandle = (userName, password) => {
-    // const foundUser = Users.filter( item => {
-    //     return userName == item.username && password == item.password;
-    // } );
-
     axios
       .post("https://livebusapi.herokuapp.com/api/users/login-driver", {
         username: userName,
@@ -110,21 +105,6 @@ const SignInScreen = ({ navigation }) => {
           { text: "Okay" },
         ]);
       });
-
-    // if ( data.username.length == 0 || data.password.length == 0 ) {
-    //     Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-    //         {text: 'Okay'}
-    //     ]);
-    //     return;
-    // }
-
-    // if ( foundUser.length == 0 ) {
-    //     Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-    //         {text: 'Okay'}
-    //     ]);
-    //     return;
-    // }
-    // signIn(foundUser);
   };
 
   return (
@@ -251,19 +231,6 @@ const SignInScreen = ({ navigation }) => {
               </Text>
             </LinearGradient>
           </TouchableOpacity>
-
-          {/* <TouchableOpacity
-                    onPress={() => navigation.navigate('SignUpScreen')}
-                    style={[styles.signIn, {
-                        borderColor: '#826EB4',
-                        borderWidth: 1,
-                        marginTop: 15
-                    }]}
-                >
-                    <Text style={[styles.textSign, {
-                        color: '#826EB4'
-                    }]}>Sign Up</Text>
-                </TouchableOpacity> */}
         </View>
       </Animatable.View>
     </View>
