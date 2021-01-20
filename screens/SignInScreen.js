@@ -101,12 +101,14 @@ const SignInScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log(error);
+        console.log(userName);
+        console.log(password);
         Alert.alert("Invalid User!", "Username or password is incorrect.", [
           { text: "Okay" },
         ]);
       });
   };
-
+  // console.log(JSON.stringify(data));
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#694fad" barStyle="light-content" />
@@ -203,7 +205,7 @@ const SignInScreen = ({ navigation }) => {
           </Animatable.View>
         )}
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => alert("Contact Transport Officer")}>
           <Text style={{ color: "#826EB4", marginTop: 15 }}>
             Forgot password?
           </Text>

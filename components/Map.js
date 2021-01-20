@@ -148,5 +148,3 @@ const styles = StyleSheet.create({
 });
 
 export default Map;
-
-// https://lucianasato.eti.br/react-native/build-a-react-native-app-using-expo-installation-navigation-tabs-google-maps-part-1

@@ -42,10 +42,8 @@ export function DrawerContent(props) {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Avatar.Image
-                source={{
-                  uri: "https://api.adorable.io/avatars/50/abott@adorable.png",
-                }}
-                size={50}
+                source={require("../assets/banners/driverLogo.jpg")}
+                size={65}
               />
               <View style={{ marginLeft: 15, flexDirection: "column" }}>
                 <Title style={styles.title}>
@@ -55,15 +53,26 @@ export function DrawerContent(props) {
               </View>
             </View>
 
-            <View style={styles.row}>
+            <View
+              style={{
+                marginTop: 5,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               {/* <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>80</Paragraph>
-                                <Caption style={styles.caption}>Following</Caption>
-                            </View>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>100</Paragraph>
-                                <Caption style={styles.caption}>Followers</Caption>
-                            </View> */}
+                <Caption style={[styles.paragraph, styles.caption]}>
+                  To be ranked amongst the best in research excellence and its
+                  market utility.
+                </Caption>
+                <Caption style={styles.caption}>Following</Caption> 
+              </View> */}
+              {/* <View style={styles.section}>
+                <Paragraph style={[styles.paragraph, styles.caption]}>
+                  100
+                </Paragraph>
+                <Caption style={styles.caption}>Followers</Caption>
+              </View> */}
             </View>
           </View>
 

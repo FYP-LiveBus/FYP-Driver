@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
+  TouchableOpacity,
   Button,
   Image,
   StyleSheet,
@@ -11,8 +12,9 @@ import {
 } from "react-native";
 import Swiper from "react-native-swiper";
 import { useTheme } from "@react-navigation/native";
-import { TextInput } from "react-native-gesture-handler";
-import { Title } from "react-native-paper";
+// import { TextInput } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
+// import { Title } from "react-native-paper";
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Notifications from "expo-notifications";
@@ -20,7 +22,11 @@ import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import * as firebase from "firebase";
 import "firebase/firestore";
-import { set } from "react-native-reanimated";
+// import { set } from "react-native-reanimated";
+
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -53,7 +59,7 @@ const HomeScreen = ({ navigation }) => {
                 setBusDetails(b);
                 setRouteDetails(response.data);
               })
-              .catch((e) => alert("Bo bus is assigned to this route"));
+              .catch((e) => console.log("No bus is assigned to this route"));
           })
           .catch((err) => alert("No route is assigned you"));
         setUser(user1);
@@ -70,47 +76,6 @@ const HomeScreen = ({ navigation }) => {
     }
     (() => registerForPushNotificationsAsync())();
   }, []);
-
-  // const registerForPushNotificationsAsync = async () => {
-  //   let token;
-  //   if (Constants.isDevice) {
-  //     const { status: existingStatus } = await Permissions.getAsync(
-  //       Permissions.NOTIFICATIONS
-  //     );
-  //     let finalStatus = existingStatus;
-  //     if (existingStatus !== "granted") {
-  //       const { status } = await Permissions.askAsync(
-  //         Permissions.NOTIFICATIONS
-  //       );
-  //       finalStatus = status;
-  //     }
-  //     if (finalStatus !== "granted") {
-  //       alert("Failed to get push token for push notification!");
-  //       return;
-  //     }
-  //     token = (await Notifications.getExpoPushTokenAsync()).data;
-  //     console.log(token);
-  //   } else {
-  //     alert("Must use physical device for Push Notifications");
-  //   }
-
-  //   const res = await firebase
-  //     .firestore()
-  //     .collection("Tokens/")
-  //     .doc(user._id)
-  //     .set({ token });
-
-  //   if (Platform.OS === "android") {
-  //     Notifications.setNotificationChannelAsync("default", {
-  //       name: "default",
-  //       importance: Notifications.AndroidImportance.MAX,
-  //       vibrationPattern: [0, 250, 250, 250],
-  //       lightColor: "#FF231F7C",
-  //     });
-  //   }
-
-  //   return token;
-  // };
 
   const registerForPushNotificationsAsync = async () => {
     let token;
@@ -183,7 +148,7 @@ const HomeScreen = ({ navigation }) => {
       );
     }
   };
-
+  console.log(routeDetails);
   return (
     <ScrollView style={styles.container}>
       <StatusBar barStyle={theme.dark ? "light-content" : "dark-content"} />
@@ -218,23 +183,49 @@ const HomeScreen = ({ navigation }) => {
         </Swiper>
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 45 }}>
-        <Title style={{ marginLeft: 130, marginBottom: 20 }}>
+      <View style={{ marginTop: 45, marginLeft: 30, marginBottom: 13 }}>
+        <Text style={{ fontSize: 17, color: "#202020" }}>
           Route No: {routeDetails.routeNo}
-        </Title>
+        </Text>
       </View>
 
-      <Title style={{ marginLeft: 80, marginBottom: 20 }}>
-        Starting Point: {routeDetails.startingPoint}
-      </Title>
-      <View style={{ width: "35%", marginLeft: 120, marginTop: 20 }}>
-        <Button
-          color="#694fad"
-          title="Lets Go"
-          height="100"
-          borderRadius="10"
-          onPress={() => startHandler()}
-        />
+      <View style={{ marginLeft: 30, marginBottom: 13 }}>
+        <Text style={{ fontSize: 17, color: "#202020" }}>
+          Bus No: {routeDetails.busNo}
+        </Text>
+      </View>
+
+      <View style={{ marginLeft: 30, marginBottom: 20 }}>
+        <Text style={{ fontSize: 17, color: "#202020" }}>
+          Starting Point: {routeDetails.startingPoint}
+        </Text>
+      </View>
+
+      <View
+        style={
+          (styles.button,
+          {
+            width: "41%",
+            alignSelf: "flex-end",
+            marginRight: 20,
+            marginTop: 20,
+          })
+        }
+      >
+        <TouchableOpacity style={styles.signIn} onPress={() => startHandler()}>
+          <LinearGradient colors={["#694fad", "#826EB4"]} style={styles.signIn}>
+            <Text
+              style={[
+                styles.textSign,
+                {
+                  color: "#fff",
+                },
+              ]}
+            >
+              Let's Start
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -265,5 +256,20 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     borderRadius: 8,
+  },
+  button: {
+    alignItems: "center",
+    marginTop: 100,
+  },
+  signIn: {
+    width: "100%",
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 17,
+    fontWeight: "bold",
   },
 });

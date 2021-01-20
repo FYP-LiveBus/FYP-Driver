@@ -11,7 +11,7 @@ const SupportScreen = ({ navigation }) => {
       <Button
         title="Email us"
         onPress={() => {
-          Linking.openURL("mailto:faranayyaz@gmail.com");
+          Linking.openURL("mailto: transport@cuilahore.edu.pk");
           navigation.goBack();
         }}
       />
